@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ArrowOutward, Check, ContentCopy, Email, GitHub, LinkedIn, LocationOn, Phone, School } from "@mui/icons-material"
+import { ArrowOutward, Check, ContentCopy, Email, GitHub, LinkedIn, Phone, School } from "@mui/icons-material"
 import { Box, Button, Card, CardContent, Chip, Container, Divider, IconButton, Snackbar, Stack, Typography } from "@mui/material"
 
 const GITHUB = "https://github.com/bhargav7014"
@@ -20,7 +20,7 @@ const skills = [
 
 const projects = [
   { title: "AI Resume Analyzer", status: "Personal project", description: "A resume builder and AI-assisted analyzer supporting resume editing, multiple templates, PDF/DOCX import, resume enhancement and ATS-oriented analysis through a server-side AI proxy.", technologies: ["React", "Vite", "JavaScript", "Express", "Groq AI", "PDF.js", "Mammoth"], github: `${GITHUB}/ai-resume` },
-  { title: "Bharat AI Recipe App", status: "Personal project", description: "A React Native recipe application with authentication, recipe discovery, favorites, AI recipe generation, chat, offline-aware handling and API integration. A separate Node/Express backend supports the application.", technologies: ["React Native", "Expo", "Axios", "AsyncStorage", "Node.js", "Express", "MongoDB", "AI"], github: `${GITHUB}/Bharat-ai-recipe-app`, secondaryGithub: `${GITHUB}/indian-recipe-app-backend` },
+  { title: "CookMitra", status: "Personal project", description: "A React Native recipe application with authentication, recipe discovery, favorites, AI recipe generation, chat, offline-aware handling and API integration. A separate Node/Express backend supports the application.", technologies: ["React Native", "Expo", "Axios", "AsyncStorage", "Node.js", "Express", "MongoDB", "AI"], github: `${GITHUB}/Bharat-ai-recipe-app`, secondaryGithub: `${GITHUB}/indian-recipe-app-backend` },
   { title: "SaaS Admin & User Dashboard", status: "In progress", description: "A role-based SaaS dashboard with login and registration, protected routes, admin/user dashboards, user management and profile flows. The project is currently being developed further.", technologies: ["React", "TypeScript", "Vite", "React Router", "Zustand", "Axios", "Radix UI"], github: `${GITHUB}/saas-app` },
   { title: "Weather App", status: "Personal project", description: "A React weather application that searches cities through the OpenWeather API and displays current temperature, humidity, wind speed and weather conditions with dynamic weather icons.", technologies: ["React", "Vite", "OpenWeather API", "CSS"], github: `${GITHUB}/WeatherApp` },
 ]
@@ -49,9 +49,10 @@ function CopyButton({ value, label = "Copy" }) {
 }
 
 function ProjectCard({ project }) {
+  const isSaas = project.title === "SaaS Admin & User Dashboard"
   return <Card sx={{ height: "100%", background: "linear-gradient(145deg, rgba(17,24,39,.92), rgba(10,15,28,.94))", border: "1px solid rgba(148,163,184,.14)", borderRadius: 4, transition: "transform .25s ease, border-color .25s ease", "&:hover": { transform: "translateY(-5px)", borderColor: "rgba(129,140,248,.45)" } }}><CardContent sx={{ p: { xs: 3, md: 3.5 }, height: "100%", display: "flex", flexDirection: "column" }}>
     <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}><Chip label={project.status} size="small" sx={{ ...chipSx, border: "1px solid", borderColor: project.status === "In progress" ? "rgba(251,191,36,.35)" : "rgba(129,140,248,.3)", color: project.status === "In progress" ? "#fbbf24" : "#a5b4fc" }} /><Typography sx={{ color: "#475569", fontSize: ".75rem" }}>PROJECT</Typography></Stack>
-    <Typography sx={{ fontSize: "1.35rem", fontWeight: 800, mb: 1.5 }}>{project.title}</Typography><Typography sx={{ color: "#94a3b8", lineHeight: 1.75, fontSize: ".95rem", mb: 2.5 }}>{project.description}</Typography>
+    <Typography sx={{ fontSize: "1.35rem", fontWeight: 800, mb: 1.5, color: isSaas ? "#a5b4fc" : "#f8fafc", textShadow: isSaas ? "0 0 18px rgba(129,140,248,.28)" : "none" }}>{project.title}</Typography><Typography sx={{ color: "#94a3b8", lineHeight: 1.75, fontSize: ".95rem", mb: 2.5 }}>{project.description}</Typography>
     <Stack direction="row" spacing={.8} useFlexGap flexWrap="wrap" sx={{ mb: 3 }}>{project.technologies.map((item) => <Chip key={item} label={item} size="small" sx={chipSx} />)}</Stack>
     <Stack direction="row" spacing={1} sx={{ mt: "auto" }}><Button href={project.github} target="_blank" rel="noreferrer" startIcon={<GitHub />} size="small" variant="outlined" sx={{ textTransform: "none", borderColor: "rgba(148,163,184,.25)" }}>Source</Button>{project.secondaryGithub && <Button href={project.secondaryGithub} target="_blank" rel="noreferrer" startIcon={<GitHub />} size="small" variant="outlined" sx={{ textTransform: "none", borderColor: "rgba(148,163,184,.25)" }}>Backend</Button>}</Stack>
   </CardContent></Card>
@@ -60,7 +61,6 @@ function ProjectCard({ project }) {
 export default function Portfolio() {
   const year = useMemo(() => new Date().getFullYear(), [])
   const [toast, setToast] = useState(false)
-  const copyContact = async (value) => { try { await navigator.clipboard.writeText(value); setToast(true) } catch {} }
 
   return <Box sx={{ minHeight: "100vh", background: "#070a12", color: "#f8fafc", overflow: "hidden", "& a": { textDecoration: "none" } }}>
     <Box sx={{ position: "fixed", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 10% 5%, rgba(99,102,241,.16), transparent 28%), radial-gradient(circle at 90% 12%, rgba(56,189,248,.08), transparent 24%)" }} />
