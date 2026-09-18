@@ -96,7 +96,7 @@ export default function Portfolio(){
 
     <section className={styles.statement}><span>02</span><div><p className={styles.eyebrow}>A DEVELOPER WHO LIKES SYSTEMS</p><h2>I turn ideas into <em>working products.</em></h2></div><p>From responsive interfaces to connected devices, I work across the stack and care about how every layer fits together — product, frontend, mobile, backend, data and delivery.</p></section>
 
-    <section id="skills" className={styles.skills}><div className={styles.sectionHead}><div><p className={styles.eyebrow}>03 — TOOLKIT</p><h2>The stack behind<br/><em>the work.</em></h2></div><p>Technologies I use across web, mobile, backend and connected applications.</p></div><div className={styles.system}><div className={styles.core}><b>BH</b><span>FULL<br/>STACK</span></div>{skillGroups.map((g,i)=><div key={g[0]} className={styles["node node"+i]}>{g.map((v,j)=>j===0?<b key={v}>{v}</b>:<span key={v}>{v}</span>)}</div>)}</div></section>
+    <section id="skills" className={styles.skills}><div className={styles.sectionHead}><div><p className={styles.eyebrow}>03 — TOOLKIT</p><h2>The stack behind<br/><em>the work.</em></h2></div><p>Technologies I use across web, mobile, backend and connected applications.</p></div><div className={styles.system}><div className={styles.core}><b>BH</b><span>FULL<br/>STACK</span></div>{skillGroups.map((g,i)=><div key={g[0]} className={styles.node+" "+styles["node"+i]}>{g.map((v,j)=>j===0?<b key={v}>{v}</b>:<span key={v}>{v}</span>)}</div>)}</div></section>
 
     <section id="projects" className={styles.projects}><div className={styles.sectionHead}><div><p className={styles.eyebrow}>04 — SELECTED WORK</p><h2>Things I&apos;ve<br/><em>built.</em></h2></div><p>Real projects across AI, SaaS, mobile and IoT, with the engineering work kept visible.</p></div><div className={styles.projectGrid}>{projects.map((p,i)=><Project key={p.title} item={p} index={i}/>)}</div></section>
 
@@ -108,3 +108,4 @@ export default function Portfolio(){
 
     <footer className={styles.footer}><span>© {year} BHARGAV HJ</span><span>FULL STACK · MOBILE · IoT</span><div><a href={GITHUB} target="_blank" rel="noreferrer"><GitHub fontSize="small"/></a><a href={LINKEDIN} target="_blank" rel="noreferrer"><LinkedIn fontSize="small"/></a><a href={"mailto:"+EMAIL}><Email fontSize="small"/></a></div></footer>
   </main>
+}
