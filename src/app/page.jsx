@@ -75,7 +75,7 @@ function WorldCanvas({ progress, mouseX, mouseY }) {
 function Project({item,index}) {
   const [show,setShow]=useState(false)
   return <motion.article className={styles.project} initial={{opacity:0,y:45}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.7,delay:index*.08}} onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)}>
-    <div className={styles.projectArt}><span>{item.n}</span><i className={styles.projectCore}/><b>{item.type}</b><em>{show?"OPEN SOURCE ↗":"SCROLL / HOVER"}</em></div>
+    <div className={styles.projectArt}><span>{item.n}</span><div className={styles["projectVisual"+index]}><i/><i/><i/></div><b>{item.type}</b><em>{show?"OPEN SOURCE ↗":"SCROLL / HOVER"}</em></div>
     <div className={styles.projectInfo}><small>SELECTED WORK · 2026</small><h3>{item.title}</h3><p>{item.text}</p><label>{item.detail}</label><div className={styles.tags}>{item.tech.map(t=><span key={t}>{t}</span>)}</div><div className={styles.links}><a href={GITHUB+"/"+item.repo} target="_blank" rel="noreferrer">SOURCE <GitHub fontSize="inherit"/></a>{item.backend&&<a href={GITHUB+"/"+item.backend} target="_blank" rel="noreferrer">BACKEND <ArrowOutward fontSize="inherit"/></a>}</div></div>
   </motion.article>
 }
