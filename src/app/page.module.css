@@ -750,3 +750,6 @@
     display: none;
   }
 }
+
+
+.contactActions{display:flex;flex-direction:column;align-items:center;gap:12px}.contactHint{font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}.contactHint span{display:inline-block;margin-left:5px;color:var(--gold);font-size:14px;animation:contactArrow 1.4s ease-in-out infinite}@keyframes contactArrow{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(4px);opacity:1}}
