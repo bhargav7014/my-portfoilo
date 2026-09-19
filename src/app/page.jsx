@@ -555,9 +555,17 @@ export default function Portfolio() {
       <section id="contact" className={styles.contact}>
         <p className={styles.eyebrow}>05 — CONTACT</p>
         <h2>Let&apos;s build something<br /><em>worth remembering.</em></h2>
-        <a className={styles.contactButton} href={`mailto:${EMAIL}`}>
-          START A CONVERSATION <ArrowOutward fontSize="small" />
-        </a>
+        <div className={styles.contactActions}>
+          <a
+            className={styles.contactButton}
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=Let&apos;s%20work%20together`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            START A CONVERSATION <ArrowOutward fontSize="small" />
+          </a>
+          <span className={styles.contactHint}>Opens Gmail with my email already filled in <span>↓</span></span>
+        </div>
       </section>
 
       <footer className={styles.footer}>
