@@ -7,7 +7,7 @@ import styles from "./page.module.css"
 
 const GITHUB = "https://github.com/bhargav7014"
 const LINKEDIN = "https://linkedin.com/in/bhargav-hj-b0a9b7283"
-const EMAIL = "bhargavhj@gmail.com"
+const EMAIL = "bhargavhj7@gmail.com"
 
 const skills = [
   { title: "LANGUAGES", number: "01", items: ["JavaScript", "TypeScript", "SQL"], className: "languages" },
@@ -558,7 +558,7 @@ export default function Portfolio() {
         <div className={styles.contactActions}>
           <a
             className={styles.contactButton}
-            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=Let&apos;s%20work%20together`}
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=Let%27s%20work%20together`}
             target="_blank"
             rel="noreferrer"
           >
