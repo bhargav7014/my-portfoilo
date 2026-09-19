@@ -13,15 +13,15 @@ const skills = [
   { title: "LANGUAGES", number: "01", items: ["JavaScript", "TypeScript", "SQL"], className: "languages" },
   { title: "WEB", number: "02", items: ["React.js", "Next.js", "HTML5", "CSS3"], className: "web" },
   { title: "MOBILE", number: "03", items: ["React Native", "Expo"], className: "mobile" },
-  { title: "BACKEND", number: "04", items: ["Node.js", "Express.js", "REST APIs", "Redis"], className: "backend" },
-  { title: "DATA", number: "05", items: ["MongoDB", "Realm", "Firebase", "AsyncStorage", "Zustand"], className: "data" },
-  { title: "DEVOPS & TOOLS", number: "06", items: ["Git", "GitHub Actions", "VS Code", "Postman", "Figma"], className: "devops" },
+  { title: "BACKEND", number: "04", items: ["Node.js", "Express.js", "REST APIs"], className: "backend" },
+  { title: "DATA", number: "05", items: ["MongoDB", "Realm", "Firebase", "AsyncStorage", "Zustand", "Context API"], className: "data" },
+  { title: "DEVOPS & TOOLS", number: "06", items: ["Git", "GitHub", "GitHub Actions", "VS Code", "Android Studio", "Postman", "Figma"], className: "devops" },
 ]
 
 const projects = [
-  ["01", "IoT DEVICE MONITORING", "A connected-device platform for telemetry, lifecycle tracking, alerts and real-time health visibility."],
-  ["02", "AI RESUME ANALYZER", "A resume builder and AI-assisted analyzer with templates, document import and ATS-focused feedback."],
-  ["03", "COOKMITRA", "A React Native recipe experience with discovery, favorites, AI recipe generation and offline-aware flows."],
+  { number: "01", type: "BLE / IoT", title: "BLE Power", text: "IoT mobile application work focused on BLE communication, device pairing and device management, using Realm Database and Zustand for local data and state handling.", href: GITHUB },
+  { number: "02", type: "AI / WEB", title: "AI Resume Analyzer", text: "React/Vite resume application integrating Google Gemini AI for resume analysis and ATS-focused insights, with PDF/DOCX document handling.", href: GITHUB + "/ai-resume" },
+  { number: "03", type: "MOBILE / IoT", title: "LIV App", text: "Connected-health mobile application work including device link/unlink flows, Sleep and Activity modules, and REST API integration.", href: GITHUB },
 ]
 
 function WorldCanvas({ progress, mouseX, mouseY }) {
@@ -436,7 +436,7 @@ export default function Portfolio() {
           BH<span>.</span>
         </a>
         <nav className={menu ? styles.mobileNav : styles.navLinks}>
-          {[["WORK", "projects"], ["STACK", "skills"], ["EXPERIENCE", "about"], ["CONTACT", "contact"]].map(([label, id]) => (
+          {[["ABOUT", "about"], ["STACK", "skills"], ["WORK", "projects"], ["CONTACT", "contact"]].map(([label, id]) => (
             <a
               key={id}
               href={`#${id}`}
@@ -528,9 +528,9 @@ export default function Portfolio() {
           <p>Selected projects shaped by curiosity, collaboration and a bias toward shipping.</p>
         </div>
         <div className={styles.projectGrid}>
-          {projects.map(([number, type, text], index) => (
+          {projects.map((project, index) => (
             <motion.article
-              key={number}
+              key={project.number}
               className={styles.projectCard}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -538,12 +538,13 @@ export default function Portfolio() {
               transition={{ delay: index * 0.1 }}
             >
               <div className={styles.projectTop}>
-                <span>{number}</span>
+                <span>{project.number}</span>
                 <ArrowOutward fontSize="small" />
               </div>
-              <p className={styles.eyebrow}>{type}</p>
-              <h3>{text}</h3>
-              <a href={GITHUB} target="_blank" rel="noreferrer">
+              <p className={styles.eyebrow}>{project.type}</p>
+              <h3>{project.title}</h3>
+              <p className={styles.projectDescription}>{project.text}</p>
+              <a href={project.href} target="_blank" rel="noreferrer">
                 VIEW PROJECT <ArrowOutward fontSize="inherit" />
               </a>
             </motion.article>
@@ -561,7 +562,7 @@ export default function Portfolio() {
 
       <footer className={styles.footer}>
         <span>© {new Date().getFullYear()} BHARGAV HJ</span>
-        <span>FULL STACK · MOBILE · IoT</span>
+        <span>FULL STACK · MOBILE · IoT · +91 8310320913</span>
         <div>
           <a href={GITHUB} target="_blank" rel="noreferrer"><GitHub fontSize="small" /></a>
           <a href={LINKEDIN} target="_blank" rel="noreferrer"><LinkedIn fontSize="small" /></a>
