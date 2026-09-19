@@ -436,7 +436,7 @@ export default function Portfolio() {
           BH<span>.</span>
         </a>
         <nav className={menu ? styles.mobileNav : styles.navLinks}>
-          {[["ABOUT", "about"], ["STACK", "skills"], ["WORK", "projects"], ["CONTACT", "contact"]].map(([label, id]) => (
+          {[["HOME", "top"], ["ABOUT", "about"], ["STACK", "skills"], ["WORK", "projects"], ["CONTACT", "contact"]].map(([label, id]) => (
             <a
               key={id}
               href={`#${id}`}
