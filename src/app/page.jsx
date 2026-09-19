@@ -25,11 +25,25 @@ const projects = [
 ]
 
 function SkillCard({ skill }) {
-  return <motion.article className={`${styles.skillCard} ${styles[skill.className]}`} whileHover={{ y: -5, borderColor: "rgba(246,194,72,.8)" }} transition={{ duration: .25 }}>
-    <h3>{skill.title}</h3><span className={styles.cardRule} />
-    <ul>{skill.items.map(item => <li key={item}>{item}</li>)}</ul>
-    <footer><small>{skill.number}</small><ArrowOutward fontSize="inherit" /></footer>
-  </motion.article>
+  return (
+    <motion.article
+      className={`${styles.skillCard} ${styles[skill.className]}`}
+      whileHover={{ y: -5, borderColor: "rgba(246,194,72,.8)" }}
+      transition={{ duration: 0.25 }}
+    >
+      <h3>{skill.title}</h3>
+      <span className={styles.cardRule} />
+      <ul>
+        {skill.items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <footer>
+        <small>{skill.number}</small>
+        <ArrowOutward fontSize="inherit" />
+      </footer>
+    </motion.article>
+  )
 }
 
 export default function Portfolio() {
@@ -37,12 +51,22 @@ export default function Portfolio() {
   const [active, setActive] = useState("home")
 
   useEffect(() => {
-    const sections = ["home", "about", "skills", "projects", "contact"].map(id => document.getElementById(id)).filter(Boolean)
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-      if (visible) setActive(visible.target.id)
-    }, { rootMargin: "-35% 0px -55%", threshold: [0, .2, .5] })
-    sections.forEach(section => observer.observe(section))
+    const sections = ["home", "about", "skills", "projects", "contact"]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+
+        if (visible) setActive(visible.target.id)
+      },
+      { rootMargin: "-35% 0px -55%", threshold: [0, 0.2, 0.5] }
+    )
+
+    sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
   }, [])
 
@@ -51,31 +75,190 @@ export default function Portfolio() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
-  return <main className={styles.page}>
-    <div className={styles.ambient} aria-hidden="true" /><div className={styles.grain} aria-hidden="true" />
-    <header className={styles.nav}>
-      <button className={styles.logo} onClick={() => navigate("home")} aria-label="Go home">BH<span>.</span></button>
-      <nav className={menuOpen ? `${styles.navLinks} ${styles.navLinksOpen}` : styles.navLinks}>
-        {["home", "about", "skills", "projects", "contact"].map(id => <button key={id} className={active === id ? styles.active : ""} onClick={() => navigate(id)}>{id.toUpperCase()}</button>)}
-      </nav>
-      <a className={styles.navCta} href={`mailto:${EMAIL}`}>LET&apos;S TALK <ArrowOutward fontSize="inherit" /></a>
-      <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <Close /> : <Menu />}</button>
-    </header>
+  return (
+    <main className={styles.page}>
+      <div className={styles.ambient} aria-hidden="true" />
+      <div className={styles.grain} aria-hidden="true" />
 
-    <section id="home" className={styles.hero}>
-      <div className={styles.heroLabel}><span>01</span><p>FULL STACK DEVELOPER<br />MOBILE · IoT · WEB</p></div>
-      <svg className={styles.heroLines} viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true"><circle cx="600" cy="380" r="180" /><circle cx="600" cy="380" r="230" /><circle cx="600" cy="380" r="285" /><path d="M0 175 L430 340 M0 575 L430 410 M1200 200 L770 340 M1200 535 L770 410" /><path d="M600 0V180 M600 580V760" /></svg>
-      <div className={styles.heroCore}><span className={styles.coreInitials}>BH</span><span className={styles.coreRule} /><p>FULL STACK</p><small>BUILD · INNOVATE · DEPLOY</small></div>
-      <div className={styles.heroIntro}><p className={styles.eyebrow}>HELLO, I&apos;M BHARGAV HJ</p><h1>Digital products<br /><em>with purpose.</em></h1><button onClick={() => navigate("projects")} className={styles.textLink}>EXPLORE MY WORK <ArrowOutward fontSize="inherit" /></button></div>
-    </section>
+      <header className={styles.nav}>
+        <button className={styles.logo} onClick={() => navigate("home")} aria-label="Go home">
+          BH<span>.</span>
+        </button>
 
-    <section id="about" className={`${styles.section} ${styles.about}`}><span className={styles.sectionNo}>02</span><div><p className={styles.eyebrow}>A DEVELOPER WHO LIKES SYSTEMS</p><h2>I turn ideas into <em>working products.</em></h2></div><p className={styles.aboutCopy}>I build thoughtful, scalable experiences across the web, mobile and connected devices. From the first line of code to the final interaction, I care about clarity, performance and the details that make software feel effortless.</p></section>
+        <nav className={menuOpen ? `${styles.navLinks} ${styles.navLinksOpen}` : styles.navLinks}>
+          {["home", "about", "skills", "projects", "contact"].map((id) => (
+            <button
+              key={id}
+              className={active === id ? styles.active : ""}
+              onClick={() => navigate(id)}
+            >
+              {id.toUpperCase()}
+            </button>
+          ))}
+        </nav>
 
-    <section id="skills" className={styles.skillsSection}><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>03 — TOOLKIT</p><h2>The stack behind<br /><em>the work.</em></h2></div><p>Technology is a tool. The right combination makes the impossible feel simple.</p></div><div className={styles.skillMap}><div className={styles.skillCore}><b>BH</b><span>FULL STACK</span><small>BUILD · INNOVATE · DEPLOY</small></div><svg className={styles.mapLines} viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><circle cx="600" cy="300" r="145" /><circle cx="600" cy="300" r="205" /><path d="M250 135 L470 260 M520 25 L560 160 M950 140 L730 260 M250 470 L470 340 M820 475 L710 350 M1150 300 L760 300" /></svg>{skills.map(skill => <SkillCard key={skill.title} skill={skill} />)}</div></section>
+        <a className={styles.navCta} href={`mailto:${EMAIL}`}>
+          LET&apos;S TALK <ArrowOutward fontSize="inherit" />
+        </a>
 
-    <section id="projects" className={`${styles.section} ${styles.projects}`}><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>04 — SELECTED WORK</p><h2>Things I&apos;ve<br /><em>built.</em></h2></div><p>Selected projects shaped by curiosity, collaboration and a bias toward shipping.</p></div><div className={styles.projectGrid}>{projects.map(([number, type, text], index) => <motion.article key={number} className={styles.projectCard} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ delay: index * .1 }}><div className={styles.projectTop}><span>{number}</span><ArrowOutward fontSize="small" /></div><p className={styles.eyebrow}>{type}</p><h3>{text}</h3><a href={GITHUB} target="_blank" rel="noreferrer">VIEW PROJECT <ArrowOutward fontSize="inherit" /></a></motion.article>)}</div></section>
+        <button
+          className={styles.menuButton}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+        >
+          {menuOpen ? <Close /> : <Menu />}
+        </button>
+      </header>
 
-    <section id="contact" className={styles.contact}><p className={styles.eyebrow}>05 — CONTACT</p><h2>Let&apos;s build something<br /><em>worth remembering.</em></h2><a className={styles.contactButton} href={`mailto:${EMAIL}`}>START A CONVERSATION <ArrowOutward fontSize="small" /></a></section>
-    <footer className={styles.footer}><span>© {new Date().getFullYear()} BHARGAV HJ</span><span>FULL STACK · MOBILE · IoT</span><div><a href={GITHUB} target="_blank" rel="noreferrer"><GitHub fontSize="small" /></a><a href={LINKEDIN} target="_blank" rel="noreferrer"><LinkedIn fontSize="small" /></a><a href={`mailto:${EMAIL}`}><Email fontSize="small" /></a></div></footer>
-  </main>
+      <section id="home" className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <div className={styles.heroLabel}>
+            <span>01</span>
+            <p>
+              FULL STACK DEVELOPER
+              <br />
+              MOBILE · IoT · WEB
+            </p>
+          </div>
+
+          <div className={styles.heroBigText}>
+            <span className={styles.word}>Building</span>
+            <span className={styles.goldWord}>digital</span>
+            <span className={styles.word}>experiences.</span>
+          </div>
+
+          <p className={styles.heroSummary}>
+            Full Stack Developer building web and cross-platform mobile products with React,
+            Next.js, React Native, TypeScript, Node.js and IoT/BLE integrations.
+          </p>
+
+          <div className={styles.heroActions}>
+            <button className={styles.primaryButton} onClick={() => navigate("projects")}>
+              Explore Work <ArrowOutward fontSize="inherit" />
+            </button>
+
+            <a className={styles.secondaryAction} href={GITHUB} target="_blank" rel="noreferrer">
+              <span>GitHub</span>
+              <GitHub fontSize="small" />
+            </a>
+          </div>
+        </div>
+
+        <div className={styles.heroVisual} aria-hidden="true">
+          <div className={styles.globeWrap}>
+            <div className={styles.globeGlow} />
+            <div className={styles.globe}>
+              <span className={`${styles.ring} ${styles.ringOne}`} />
+              <span className={`${styles.ring} ${styles.ringTwo}`} />
+              <span className={`${styles.ring} ${styles.ringThree}`} />
+            </div>
+          </div>
+
+          <div className={styles.barStrip}>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      </section>
+
+      <div className={styles.mountains} aria-hidden="true" />
+
+      <section id="about" className={`${styles.section} ${styles.about}`}>
+        <span className={styles.sectionNo}>02</span>
+        <div>
+          <p className={styles.eyebrow}>A DEVELOPER WHO LIKES SYSTEMS</p>
+          <h2>
+            I turn ideas into product experiences that feel solid, useful, and memorable.
+          </h2>
+        </div>
+      </section>
+
+      <section id="skills" className={styles.skillsSection}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>03 — TOOLKIT</p>
+            <h2>
+              The stack behind
+              <br />
+              <em>the work.</em>
+            </h2>
+          </div>
+        </div>
+
+        <div className={styles.skillMap}>
+          {skills.map((skill) => (
+            <SkillCard key={skill.title} skill={skill} />
+          ))}
+        </div>
+      </section>
+
+      <section id="projects" className={`${styles.section} ${styles.projects}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>04 — SELECTED WORK</p>
+            <h2>
+              Things I&apos;ve built
+              <br />
+              <em>with real use cases.</em>
+            </h2>
+          </div>
+        </div>
+
+        <div className={styles.projectGrid}>
+          {projects.map(([number, title, description]) => (
+            <article key={title} className={styles.projectCard}>
+              <div className={styles.projectMeta}>
+                <span>{number}</span>
+                <ArrowOutward fontSize="inherit" />
+              </div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" className={styles.contact}>
+        <p className={styles.eyebrow}>05 — CONTACT</p>
+        <h2>
+          Let&apos;s build something
+          <br />
+          <em>worth remembering.</em>
+        </h2>
+
+        <div className={styles.contactLinks}>
+          <a href={GITHUB} target="_blank" rel="noreferrer">
+            <GitHub fontSize="small" /> GitHub
+          </a>
+          <a href={LINKEDIN} target="_blank" rel="noreferrer">
+            <LinkedIn fontSize="small" /> LinkedIn
+          </a>
+          <a href={`mailto:${EMAIL}`}>
+            <Email fontSize="small" /> Email
+          </a>
+        </div>
+      </section>
+
+      <footer className={styles.footer}>
+        <span>© {new Date().getFullYear()} BHARGAV HJ</span>
+        <span>FULL STACK · MOBILE · IoT</span>
+        <div>
+          <a href={GITHUB} target="_blank" rel="noreferrer">
+            <GitHub fontSize="small" />
+          </a>
+          <a href={LINKEDIN} target="_blank" rel="noreferrer">
+            <LinkedIn fontSize="small" />
+          </a>
+        </div>
+      </footer>
+    </main>
+  )
 }
