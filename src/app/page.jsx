@@ -22,6 +22,7 @@ const projects = [
   { number: "01", type: "BLE / IoT", title: "BLE Power", text: "IoT mobile application work focused on BLE communication, device pairing and device management, using Realm Database and Zustand for local data and state handling.", href: GITHUB },
   { number: "02", type: "AI / WEB", title: "AI Resume Analyzer", text: "React/Vite resume application integrating Google Gemini AI for resume analysis and ATS-focused insights, with PDF/DOCX document handling.", href: GITHUB + "/ai-resume" },
   { number: "03", type: "MOBILE / IoT", title: "LIV App", text: "Connected-health mobile application work including device link/unlink flows, Sleep and Activity modules, and REST API integration.", href: GITHUB },
+  { number: "04", type: "3D / WEB", title: "Ancient Dragon", text: "Cinematic 3D-inspired web experience featuring a scroll-driven dragon transformation, frame-based animation, immersive visuals and responsive interactions.", href: "https://ancient-dragon.vercel.app/" },
 ]
 
 function WorldCanvas({ progress, mouseX, mouseY }) {
