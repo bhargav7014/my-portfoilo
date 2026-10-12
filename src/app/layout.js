@@ -38,7 +38,7 @@ export const metadata = {
   applicationName: "Bhargav HJ Portfolio",
   verification: {
     // Replace this placeholder with the token from Google Search Console HTML tag verification.
-    google: "PASTE_GOOGLE_SEARCH_CONSOLE_TOKEN_HERE",
+    google: "google9fa512b5373d1ae2.html",
   },
   authors: [{ name: "Bhargav HJ", url: SITE_URL }],
   creator: "Bhargav HJ",
