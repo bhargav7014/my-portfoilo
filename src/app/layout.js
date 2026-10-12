@@ -6,6 +6,20 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 const SITE_URL = "https://bhargavhj.iotkit.in"
 
+const PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Bhargav HJ",
+  url: SITE_URL,
+  jobTitle: "Full Stack Developer | React Native Developer",
+  email: "bhargavhj7@gmail.com",
+  telephone: "+91 8310320913",
+  sameAs: [
+    "https://linkedin.com/in/bhargav-hj-b0a9b7283",
+    "https://github.com/bhargav7014",
+  ],
+}
+
 export const viewport = {
   themeColor: "#020706",
   colorScheme: "dark",
@@ -83,6 +97,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
