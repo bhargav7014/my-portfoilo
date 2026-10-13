@@ -37,7 +37,7 @@ export const metadata = {
     "Official portfolio of Bhargav HJ — Full Stack Developer building high-performance web applications, cross-platform mobile apps with React Native, and connected IoT/BLE solutions.",
   applicationName: "Bhargav HJ Portfolio",
   verification: {
-    google: "google9fa512b5373d1ae2.html",
+    google: "0Zpzf75G51amanF11rVs_Wt99lejLq39j25ZZGSaZ5I",
   },
   authors: [{ name: "Bhargav HJ", url: SITE_URL }],
   creator: "Bhargav HJ",
